@@ -2,17 +2,17 @@
 
 Display ascii tables that fit in your terminal for almost any data structure.
 
-[![Build Status](https://travis-ci.org/cldwalker/table.png?branch=master)](https://travis-ci.org/cldwalker/table)
+[![Build Status](https://travis-ci.org/rm-hull/table.png?branch=master)](https://travis-ci.org/rm-hull/table)
 
 ## Install
 
 To have it available on all projects, add to your leiningen2's ~/lein/profiles.clj:
 
-    {:user {:dependencies [[table "0.5.0"]] }}
+    {:user {:dependencies [[rm-hull/table "0.6.0"]] }}
 
 To have it on an individual project, add to your project.clj:
 
-    [table "0.5.0"]
+    [table "0.6.0"]
 
 ## Usage
 

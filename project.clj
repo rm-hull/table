@@ -1,4 +1,4 @@
-(defproject table "0.6.0"
+(defproject rm-hull/table "0.6.0"
   :description "Display ascii tables for almost any data structure with ease"
   :url "http://github.com/rm-hull/table"
   :license {:name "The MIT License"
