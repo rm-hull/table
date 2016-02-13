@@ -1,6 +1,6 @@
-(defproject table "0.5.0"
+(defproject table "0.6.0"
   :description "Display ascii tables for almost any data structure with ease"
-  :url "http://github.com/cldwalker/table"
+  :url "http://github.com/rm-hull/table"
   :license {:name "The MIT License"
             :url "https://en.wikipedia.org/wiki/MIT_License"}
   :repl-options  {:init-ns table.core}
