@@ -1,6 +1,8 @@
-The MIT LICENSE
+# The MIT LICENSE
 
 Copyright (c) 2012 Gabriel Horner
+
+Copyright (c) 2016 Richard Hull
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
