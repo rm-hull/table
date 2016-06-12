@@ -1,3 +1,6 @@
+## 0.6.1
+* Added :rst style (pulled from @schmir's branch)
+
 ## 0.6.0
 * Divergent fork of https://github.com/cldwalker/table
 * Table inflation
