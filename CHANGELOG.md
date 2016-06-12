@@ -1,3 +1,11 @@
+## 0.6.0
+* Divergent fork of https://github.com/cldwalker/table
+* Table inflation
+* Add :borderless style
+* Refreshed for Clojure 1.8.0
+* Added Travis CI / Coveralls stats & badges
+* Added Codox documentation
+
 ## 0.5.0
 * Add :style option to pass new style
 * Add :unicode-3d style
