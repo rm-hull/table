@@ -274,6 +274,19 @@
       ")
     (table-str [[1 2] [3 4]] :style :unicode-3d))))
 
+(deftest test-table-with-rst-style
+  (is (=
+    (unindent
+      "
+     +---+---+
+     | 1 | 2 |
+     +===+===+
+     | 3 | 4 |
+     +---+---+
+      ")
+    (table-str [[1 2] [3 4]] :style :rst))))
+
+
 (deftest test-table-with-markdown-style
   (is (=
     (str "\n" (unindent
