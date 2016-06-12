@@ -1,18 +1,45 @@
-## Description
+# Table [![Build Status](https://travis-ci.org/rm-hull/table.svg?branch=master)](http://travis-ci.org/rm-hull/table) [![Coverage Status](https://coveralls.io/repos/rm-hull/table/badge.svg?branch=master)](https://coveralls.io/r/rm-hull/table?branch=master) [![Dependencies Status](https://jarkeeper.com/rm-hull/table/status.svg)](https://jarkeeper.com/rm-hull/table) [![Downloads](https://jarkeeper.com/rm-hull/table/downloads.svg)](https://jarkeeper.com/rm-hull/table) [![Clojars Project](https://img.shields.io/clojars/v/rm-hull/table.svg)](https://clojars.org/rm-hull/table)
 
-Display ascii tables that fit in your terminal for almost any data structure.
+Display ascii tables that fit in your terminal for almost any data
+structure.
 
-[![Build Status](https://travis-ci.org/rm-hull/table.png?branch=master)](https://travis-ci.org/rm-hull/table)
+**NOTE:** This is a diverging fork of https://github.com/cldwalker/table.
+All rights of the original author reserved.
 
-## Install
+### Pre-requisites
 
-To have it available on all projects, add to your leiningen2's ~/lein/profiles.clj:
+You will need [Leiningen](https://github.com/technomancy/leiningen) 2.6.1 or above installed.
 
-    {:user {:dependencies [[rm-hull/table "0.6.0"]] }}
+### Building
 
-To have it on an individual project, add to your project.clj:
+To build and install the library locally, run:
 
-    [table "0.6.0"]
+    $ cd table
+    $ lein test
+    $ lein install
+
+### Including in your project
+
+There is a version hosted at [Clojars](https://clojars.org/rm-hull/table).
+For leiningen include a dependency:
+
+```clojure
+[rm-hull/table "0.6.0"]
+```
+
+For maven-based projects, add the following to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>rm-hull</groupId>
+  <artifactId>table</artifactId>
+  <version>0.6.0</version>
+</dependency>
+```
+
+## API Documentation
+
+See [www.destructuring-bind.org/table](http://www.destructuring-bind.org/table/) for API details.
 
 ## Usage
 
@@ -20,7 +47,8 @@ To use in a library:
 
     (use '[table.core :only [table]])
 
-table handles rendering combinations of maps, vecs, lists and sets nested in one another.
+table handles rendering combinations of maps, vecs, lists and sets nested
+in one another.
 
     $ lein repl
     user=> (use 'table.core)
@@ -118,26 +146,33 @@ table can handle plain maps and vectors of course:
 
 ## Configuration
 
-If your terminal width isn't being auto-detected, you can execute this in your shell before using
-the repl: `export COLUMNS`. Alternatively you can bind/alter table.width/\*width\* to your desired
-width.
+If your terminal width isn't being auto-detected, you can execute this in
+your shell before using the repl: `export COLUMNS`. Alternatively you can
+bind/alter table.width/\*width\* to your desired width.
 
-## Similar libraries
-* Clojure 1.5.0 comes with a similar function clojure.pprint/print-table
-* [doric](https://github.com/joegallo/doric) is more full-featured than print-table, supporting formats other than text. But it lacks support for handling many data structures and tests are weak.
+## License
 
-table improves on these by rendering more data structures, supporting
-different ascii style tables and resizing to fit your terminal.
+### The MIT LICENSE
 
-## Bugs/Issues
-Please report them [on github](http://github.com/cldwalker/table/issues).
+Copyright (c) 2012 Gabriel Horner
 
-## Contributing
-[See here](http://tagaholic.me/contributing.html)
+Copyright (c) 2016 Richard Hull
 
-## TODO
-* Set default style
-* ~~Handle no rows~~
-* ~~Handle vecs with different sizes~~
-* Look into auto-rendering database results in reply repl
-* Escape tabs
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
