@@ -8,13 +8,13 @@
     :init-ns table.core}
   :dependencies [
     [org.clojure/clojure "1.8.0"]]
-  :scm {:url "git@github.com:rm-hull/infix.git"}
+  :scm {:url "git@github.com:rm-hull/table.git"}
   :source-paths ["src"]
   :jar-exclusions [#"(?:^|/).git"]
   :codox {
     :source-paths ["src"]
     :output-path "doc/api"
-    :source-uri "http://github.com/rm-hull/infix/blob/master/{filepath}#L{line}"  }
+    :source-uri "http://github.com/rm-hull/table/blob/master/{filepath}#L{line}"  }
   :min-lein-version "2.6.1"
   :profiles {
     :dev {
