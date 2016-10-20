@@ -1,5 +1,10 @@
 # Table
-[![Build Status](https://travis-ci.org/rm-hull/table.svg?branch=master)](http://travis-ci.org/rm-hull/table) [![Coverage Status](https://coveralls.io/repos/rm-hull/table/badge.svg?branch=master)](https://coveralls.io/r/rm-hull/table?branch=master) [![Dependencies Status](https://jarkeeper.com/rm-hull/table/status.svg)](https://jarkeeper.com/rm-hull/table) [![Downloads](https://jarkeeper.com/rm-hull/table/downloads.svg)](https://jarkeeper.com/rm-hull/table) [![Clojars Project](https://img.shields.io/clojars/v/rm-hull/table.svg)](https://clojars.org/rm-hull/table)
+[![Build Status](https://travis-ci.org/rm-hull/table.svg?branch=master)](http://travis-ci.org/rm-hull/table)
+[![Coverage Status](https://coveralls.io/repos/rm-hull/table/badge.svg?branch=master)](https://coveralls.io/r/rm-hull/table?branch=master)
+[![Dependencies Status](https://jarkeeper.com/rm-hull/table/status.svg)](https://jarkeeper.com/rm-hull/table)
+[![Downloads](https://jarkeeper.com/rm-hull/table/downloads.svg)](https://jarkeeper.com/rm-hull/table)
+[![Clojars Project](https://img.shields.io/clojars/v/rm-hull/table.svg)](https://clojars.org/rm-hull/table)
+[![Maintenance](https://img.shields.io/maintenance/yes/2016.svg?maxAge=2592000)]()
 
 Display ascii tables that fit in your terminal for almost any data
 structure.
