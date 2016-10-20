@@ -1,33 +1,31 @@
 (ns table.core
   (:require table.width)
-  (:use [clojure.string :only [join]] ))
+  (:use [clojure.string :only [join]]))
 
 (declare style-for format-cell render-rows-with-fields escape-newline render-rows table-str)
 
 (def ^:dynamic *style* :plain)
 (def ^:private walls ["| " " | " " |"])
 (def ^:private styles
-  {
-   :plain {:top ["+-" "-+-" "-+"], :middle ["+-" "-+-" "-+"] :bottom ["+-" "-+-" "-+"]
-           :dash "-" :header-walls walls :body-walls walls }
+  {:plain {:top ["+-" "-+-" "-+"], :middle ["+-" "-+-" "-+"] :bottom ["+-" "-+-" "-+"]
+           :dash "-" :header-walls walls :body-walls walls}
    :rst {:top ["+-" "-+-" "-+"], :middle ["+=" "=+=" "=+"] :bottom ["+-" "-+-" "-+"] :body ["+-" "-+-" "-+"]
-         :dash "-" :middle-dash "=" :header-walls walls :body-walls walls }
+         :dash "-" :middle-dash "=" :header-walls walls :body-walls walls}
 
    :org {:top ["|-" "-+-" "-|"], :middle ["|-" "-+-" "-|"] :bottom ["|-" "-+-" "-|"]
-         :dash "-" :header-walls walls :body-walls walls }
+         :dash "-" :header-walls walls :body-walls walls}
    :unicode {:top ["┌─" "─┬─" "─┐"] :middle ["├─" "─┼─" "─┤"] :bottom ["└─" "─┴─" "─┘"]
-             :dash "─" :header-walls ["│ " " │ " " │"] :body-walls ["│ " " ╎ " " │"] }
+             :dash "─" :header-walls ["│ " " │ " " │"] :body-walls ["│ " " ╎ " " │"]}
    :unicode-3d {:top ["┌─" "─┬─" "─╖"] :middle ["├─" "─┼─" "─╢"] :bottom ["╘═" "═╧═" "═╝"]
                 :top-dash "─" :dash "─" :bottom-dash "═"
-                :header-walls ["│ " " │ " " ║"] :body-walls ["│ " " │ " " ║"] }
+                :header-walls ["│ " " │ " " ║"] :body-walls ["│ " " │ " " ║"]}
    :github-markdown {:top ["" "" ""] :middle ["|-" " | " "-|"] :bottom ["" "" ""]
-                     :top-dash "" :dash "-" :bottom-dash "" :header-walls walls :body-walls walls }
+                     :top-dash "" :dash "-" :bottom-dash "" :header-walls walls :body-walls walls}
    :borderless {:top ["" "" ""] :middle ["" "--" ""] :bottom ["" "" ""]
-                     :top-dash "" :dash "-" :bottom-dash "" :header-walls ["" "  " ""] :body-walls ["" "  " ""] }
-   })
+                :top-dash "" :dash "-" :bottom-dash "" :header-walls ["" "  " ""] :body-walls ["" "  " ""]}})
 
 (defn table
-   "Generates an ascii table for almost any input that fits in your terminal.
+  "Generates an ascii table for almost any input that fits in your terminal.
    Multiple table styles are supported.
 
    Options:
@@ -44,7 +42,7 @@
 
 (defn table-str
   "Same options as table but returns table as a string"
-  [ args & {:keys [style] :or {style :plain} :as options}]
+  [args & {:keys [style] :or {style :plain} :as options}]
   (binding [*style* (if (map? style) style (style styles))]
     (apply str (join "\n" (render-rows args (if (map? options) options {}))))))
 
@@ -58,25 +56,24 @@
 (defn- generate-rows-and-fields
   "Returns rows and fields. Rows are a vector of vectors containing string cell values."
   [table options]
-  (let [
-       top-level-vec (not (coll? (first table)))
-       fields (cond
-               top-level-vec [:value]
-               (map? (first table)) (or (:fields options)
-                                        (distinct (vec (flatten (map keys table)))))
-               (map? table) [:key :value]
-               :else (first (inflate table)))
-       rows (cond
-             top-level-vec (map #(vector %) table)
-             (map? (first table)) (map #(map (fn [k] (get % k)) fields) table)
-             (map? table) table
-             :else (rest (inflate table)))
-       rows (map (fn [row] (map #(if (nil? %) "" (str %)) row)) rows)
-       sort-opt (options :sort)
-       rows (if (and sort-opt (some #{sort-opt} (conj fields true)))
-              (sort-by
-               #(nth % (if (true? sort-opt) 0 (.indexOf fields sort-opt)))
-               rows) rows)
+  (let [top-level-vec (not (coll? (first table)))
+        fields (cond
+                 top-level-vec [:value]
+                 (map? (first table)) (or (:fields options)
+                                          (distinct (vec (flatten (map keys table)))))
+                 (map? table) [:key :value]
+                 :else (first (inflate table)))
+        rows (cond
+               top-level-vec (map #(vector %) table)
+               (map? (first table)) (map #(map (fn [k] (get % k)) fields) table)
+               (map? table) table
+               :else (rest (inflate table)))
+        rows (map (fn [row] (map #(if (nil? %) "" (str %)) row)) rows)
+        sort-opt (options :sort)
+        rows (if (and sort-opt (some #{sort-opt} (conj fields true)))
+               (sort-by
+                #(nth % (if (true? sort-opt) 0 (.indexOf fields sort-opt)))
+                rows) rows)
         rows (->> rows (map vec) (map (fn [row] (map escape-newline row))))]
     [rows fields]))
 
@@ -94,24 +91,23 @@
   (str beg (join mid row) end))
 
 (defn- render-rows-with-fields [rows fields options]
-  (let [
-    headers (map #(if (keyword? %) (name %) (str %)) fields)
-    widths (table.width/get-widths (cons headers rows))
-    fmt-row (fn [row] (map format-cell row widths))
-    headers (fmt-row headers)
-    border-for (fn [section dash-key]
-                 (let [dash (or (style-for dash-key) (style-for :dash))]
-                   (wrap-row (map #(join (repeat % dash))
-                                  widths)
-                             (style-for section))))
-    header (wrap-row headers (style-for :header-walls))
-    body (map #(wrap-row (fmt-row %) (style-for :body-walls)) rows)
-    body (if (style-for :body)
-           (rest (interleave (repeat (border-for :body :body-dash)) body))
-           body)]
+  (let [headers (map #(if (keyword? %) (name %) (str %)) fields)
+        widths (table.width/get-widths (cons headers rows))
+        fmt-row (fn [row] (map format-cell row widths))
+        headers (fmt-row headers)
+        border-for (fn [section dash-key]
+                     (let [dash (or (style-for dash-key) (style-for :dash))]
+                       (wrap-row (map #(join (repeat % dash))
+                                      widths)
+                                 (style-for section))))
+        header (wrap-row headers (style-for :header-walls))
+        body (map #(wrap-row (fmt-row %) (style-for :body-walls)) rows)
+        body (if (style-for :body)
+               (rest (interleave (repeat (border-for :body :body-dash)) body))
+               body)]
 
     (concat [(border-for :top :top-dash) header (border-for :middle :middle-dash)]
-            body [( border-for :bottom :bottom-dash)])))
+            body [(border-for :bottom :bottom-dash)])))
 
 (defn- escape-newline [string]
   (clojure.string/replace string (str \newline) (char-escape-string \newline)))
@@ -122,7 +118,7 @@
   (if (zero? width)
     ""
     (format
-      (str "%-" width "." width "s")
-      (if (> (count string) width)
-        (str (.substring string 0 (- width 3)) "...")
-        string))))
+     (str "%-" width "." width "s")
+     (if (> (count string) width)
+       (str (.substring string 0 (- width 3)) "...")
+       string))))

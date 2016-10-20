@@ -22,10 +22,10 @@
             width-per-field (max-width-per-field max-width field-count)
             new-width (if (< width width-per-field) width width-per-field)]
         (recur
-          (conj new-widths new-width)
-          (rest widths)
-          (- field-count 1)
-          (- max-width (+ new-width inner-border-length)))))))
+         (conj new-widths new-width)
+         (rest widths)
+         (- field-count 1)
+         (- max-width (+ new-width inner-border-length)))))))
 
 (defn get-initial-widths [all-rows]
   (map

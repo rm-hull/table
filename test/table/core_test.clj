@@ -8,32 +8,32 @@
 
 (deftest test-table-prints-to-out
   (is (=
-    (str (unindent
-      "
+       (str (unindent
+             "
       +---+---+
       | 1 | 2 |
       +---+---+
       | 3 | 4 |
       +---+---+
       ") "\n")
-    (with-out-str (table [["1" "2"] ["3" "4"]])))))
+       (with-out-str (table [["1" "2"] ["3" "4"]])))))
 
 (deftest test-table-with-vecs-in-vec
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | 1 | 2 |
       +---+---+
       | 3 | 4 |
       +---+---+
       ")
-    (table-str [["1" "2"] ["3" "4"]]))))
+       (table-str [["1" "2"] ["3" "4"]]))))
 
 (deftest test-table-with-maps-in-vec
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | a | b |
       +---+---+
@@ -41,12 +41,12 @@
       | 3 | 4 |
       +---+---+
       ")
-    (table-str [{:a 1 :b 2} {:a 3 :b 4}]))))
+       (table-str [{:a 1 :b 2} {:a 3 :b 4}]))))
 
 (deftest test-table-with-top-level-map
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +-----+-------+
       | key | value |
       +-----+-------+
@@ -54,12 +54,12 @@
       | :b  | 2     |
       +-----+-------+
       ")
-    (table-str {:a 1 :b 2}))))
+       (table-str {:a 1 :b 2}))))
 
 (deftest test-table-with-top-level-vec
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +-------+
       | value |
       +-------+
@@ -68,12 +68,12 @@
       | 3     |
       +-------+
       ")
-    (table-str [1 2 3]))))
+       (table-str [1 2 3]))))
 
 (deftest test-table-with-auto-width
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +----+----+
       | a  | b  |
       +----+----+
@@ -81,24 +81,24 @@
       | 3  | 4  |
       +----+----+
       ")
-    (table-str [{:a 11 :b 22} {:a 3 :b 4}]))))
+       (table-str [{:a 11 :b 22} {:a 3 :b 4}]))))
 
 (deftest test-table-with-non-string-values
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | 1 | 2 |
       +---+---+
       | 3 | 4 |
       +---+---+
       ")
-    (table-str [[1 2] [3 4]]))))
+       (table-str [[1 2] [3 4]]))))
 
 (deftest test-table-with-string-keys
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+
       | a |
       +---+
@@ -106,12 +106,12 @@
       | 2 |
       +---+
       ")
-     (table-str [{"a" 1} {"a" 2}]))))
+       (table-str [{"a" 1} {"a" 2}]))))
 
 (deftest test-table-with-different-keys-per-row
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | a | b |
       +---+---+
@@ -119,233 +119,230 @@
       |   | 2 |
       +---+---+
       ")
-    (table-str [{:a 1} {:b 2}]))))
+       (table-str [{:a 1} {:b 2}]))))
 
 (deftest test-table-with-lists-in-list
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | 1 | 2 |
       +---+---+
       | 3 | 4 |
       +---+---+
       ")
-     (table-str '((1 2) (3 4))))))
+       (table-str '((1 2) (3 4))))))
 
 (deftest test-table-with-vecs-in-list
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | 1 | 2 |
       +---+---+
       | 3 | 4 |
       +---+---+
       ")
-    (table-str '([1 2] [3 4])))))
+       (table-str '([1 2] [3 4])))))
 
 (deftest test-table-with-sets-in-vec
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | 1 | 2 |
       +---+---+
       | 4 | 3 |
       +---+---+
       ")
-    (table-str [#{1 2} #{3 4}]))))
+       (table-str [#{1 2} #{3 4}]))))
 
 (deftest test-table-with-vecs-in-set
-   (is (=
-    (unindent
-      "
+  (is (=
+       (unindent
+        "
       +---+---+
       | 3 | 4 |
       +---+---+
       | 1 | 2 |
       +---+---+
       ")
-    (table-str #{[1 2] [3 4]}))))
+       (table-str #{[1 2] [3 4]}))))
 
 (deftest test-table-with-nil-values
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+
       | a |
       +---+
       |   |
       +---+
       ")
-    (table-str [{:a nil}]))))
+       (table-str [{:a nil}]))))
 
 (deftest test-table-with-nil
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +-------+
       | value |
       +-------+
       +-------+
       ")
-    (table-str nil))))
-
+       (table-str nil))))
 
 (deftest test-table-with-empty-vec
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +-------+
       | value |
       +-------+
       +-------+
       ")
-    (table-str []))))
+       (table-str []))))
 
 (deftest test-table-with-empty-map
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +-------+
       | value |
       +-------+
       +-------+
       ")
-    (table-str {}))))
+       (table-str {}))))
 
 (deftest test-table-with-vec-of-empty-vec
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +--+
       |  |
       +--+
       +--+
       ")
-    (table-str [[]]))))
+       (table-str [[]]))))
 
 (deftest test-table-with-vec-of-empty-map
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +--+
       |  |
       +--+
       |  |
       +--+
       ")
-    (table-str [{}]))))
+       (table-str [{}]))))
 
 (deftest test-table-with-org-style
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       |---+---|
       | 1 | 2 |
       |---+---|
       | 3 | 4 |
       |---+---|
       ")
-      (table-str [[1 2] [3 4]] :style :org))))
+       (table-str [[1 2] [3 4]] :style :org))))
 
 (deftest test-table-with-unicode-style
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       ┌───┬───┐
       │ 1 │ 2 │
       ├───┼───┤
       │ 3 ╎ 4 │
       └───┴───┘
       ")
-    (table-str [[1 2] [3 4]] :style :unicode))))
+       (table-str [[1 2] [3 4]] :style :unicode))))
 
 (deftest test-table-with-unicode-3d-style
   (is (=
-    (unindent
-      "
+       (unindent
+        "
      ┌───┬───╖
      │ 1 │ 2 ║
      ├───┼───╢
      │ 3 │ 4 ║
      ╘═══╧═══╝
       ")
-    (table-str [[1 2] [3 4]] :style :unicode-3d))))
+       (table-str [[1 2] [3 4]] :style :unicode-3d))))
 
 (deftest test-table-with-rst-style
   (is (=
-    (unindent
-      "
+       (unindent
+        "
      +---+---+
      | 1 | 2 |
      +===+===+
      | 3 | 4 |
      +---+---+
       ")
-    (table-str [[1 2] [3 4]] :style :rst))))
-
+       (table-str [[1 2] [3 4]] :style :rst))))
 
 (deftest test-table-with-markdown-style
   (is (=
-    (str "\n" (unindent
-      "
+       (str "\n" (unindent
+                  "
       | 10 | 20 |
       |--- | ---|
       | 3  | 4  |
       ") "\n")
-    (table-str [[10 20] [3 4]] :style :github-markdown))))
+       (table-str [[10 20] [3 4]] :style :github-markdown))))
 
 (deftest test-table-with-borderless-style
   (is (=
-    (str
-      "\n"
-      "name    age  country    \n"
-      "------------------------\n"
-      "Jim     41   Poland     \n"
-      "Robert  11   New Zealand\n")
-    (table-str [
-      ["name"  "age" "country"]
-      ["Jim"    41   "Poland"]
-      ["Robert" 11   "New Zealand"]]
-      :style :borderless))))
+       (str
+        "\n"
+        "name    age  country    \n"
+        "------------------------\n"
+        "Jim     41   Poland     \n"
+        "Robert  11   New Zealand\n")
+       (table-str [["name"  "age" "country"]
+                   ["Jim"    41   "Poland"]
+                   ["Robert" 11   "New Zealand"]]
+                  :style :borderless))))
 
 (deftest test-table-with-custom-style
   (is (=
-    (unindent
-     "
+       (unindent
+        "
       ┌────┬────╖
       │ 10 │ 20 ║
       ├────┼────╢
       │ 3  │ 4  ║
       ╘════╧════╝
       ")
-    (table-str [[10 20] [3 4]] :style {:top ["┌─" "─┬─" "─╖"]
-                                       :top-dash "─"
-                                       :middle ["├─" "─┼─" "─╢"]
-                                       :dash "─"
-                                       :bottom ["╘═" "═╧═" "═╝"]
-                                       :bottom-dash "═"
-                                       :header-walls ["│ " " │ " " ║"]
-                                       :body-walls ["│ " " │ " " ║"] }))))
+       (table-str [[10 20] [3 4]] :style {:top ["┌─" "─┬─" "─╖"]
+                                          :top-dash "─"
+                                          :middle ["├─" "─┼─" "─╢"]
+                                          :dash "─"
+                                          :bottom ["╘═" "═╧═" "═╝"]
+                                          :bottom-dash "═"
+                                          :header-walls ["│ " " │ " " ║"]
+                                          :body-walls ["│ " " │ " " ║"]}))))
 
 (deftest test-table-with-empty-cells
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +--+---+
       |  | 2 |
       +--+---+
       |  | 4 |
       +--+---+
       ")
-    (table-str [["" "2"] ["" "4"]]))))
+       (table-str [["" "2"] ["" "4"]]))))
 
 (deftest test-table-with-fields-option-and-maps
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | b | a |
       +---+---+
@@ -353,12 +350,12 @@
       | 4 | 3 |
       +---+---+
       ")
-    (table-str '({:a 1 :b 2} {:a 3 :b 4}) :fields [:b :a]))))
+       (table-str '({:a 1 :b 2} {:a 3 :b 4}) :fields [:b :a]))))
 
 (deftest test-table-with-fields-option-and-incorrect-fields
   (is (=
-    (unindent
-     "
+       (unindent
+        "
       +---+---+---+
       | b | a | c |
       +---+---+---+
@@ -366,12 +363,12 @@
       | 4 | 3 |   |
       +---+---+---+
       ")
-    (table-str [{:a 1 :b 2 :c 2} {:a 3 :b 4 :d 7}] :fields [:b :a :c]))))
+       (table-str [{:a 1 :b 2 :c 2} {:a 3 :b 4 :d 7}] :fields [:b :a :c]))))
 
 (deftest test-table-with-maps-in-vec
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+
       | a | b |
       +---+---+
@@ -380,12 +377,12 @@
       +---+---+
       2 rows in set
       ")
-    (table-str [{:a 1 :b 2} {:a 3 :b 4}] :desc true))))
+       (table-str [{:a 1 :b 2} {:a 3 :b 4}] :desc true))))
 
 (deftest test-table-with-sort-option-as-true
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +----+----+
       | 1  | 2  |
       +----+----+
@@ -393,12 +390,12 @@
       | :c | :d |
       +----+----+
       ")
-    (table-str  [[1 2] [:c :d]  [:a :b]] :sort true))))
+       (table-str  [[1 2] [:c :d]  [:a :b]] :sort true))))
 
 (deftest test-table-with-sort-option-as-field-name
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +----+----+
       | k  | v  |
       +----+----+
@@ -406,12 +403,12 @@
       | :c | :d |
       +----+----+
       ")
-    (table-str  [[:k :v] [:c :d]  [:a :b]] :sort :k))))
+       (table-str  [[:k :v] [:c :d]  [:a :b]] :sort :k))))
 
 (deftest test-table-with-invalid-sort-option-as-field-name
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +----+----+
       | k  | v  |
       +----+----+
@@ -419,26 +416,26 @@
       | :a | :b |
       +----+----+
       ")
-    (table-str  [[:k :v] [:c :d]  [:a :b]] :sort :invalid))))
+       (table-str  [[:k :v] [:c :d]  [:a :b]] :sort :invalid))))
 
 (deftest test-table-escapes-newlines
   (is (=
-    (unindent
-      (format
-        "
+       (unindent
+        (format
+         "
         +---+------+
         | 1 | 2    |
         +---+------+
         | 3 | 4%s5 |
         +---+------+
         "
-        (char-escape-string \newline)))
-    (table-str [[1,2]  [3, "4\n5"]]))))
+         (char-escape-string \newline)))
+       (table-str [[1,2]  [3, "4\n5"]]))))
 
 (deftest test-table-shortens-cell-longer-than-allowed-width
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +--------+-----------------------------------------------------------------------------------------+
       | key    | value                                                                                   |
       +--------+-----------------------------------------------------------------------------------------+
@@ -446,15 +443,15 @@
       | :long  | nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo... |
       +--------+-----------------------------------------------------------------------------------------+
       ")
-    (binding [table.width/*width* (delay 100)] (table-str {:short "yep" :long  (apply str "n"  (repeat 250 "o"))})))))
+       (binding [table.width/*width* (delay 100)] (table-str {:short "yep" :long  (apply str "n"  (repeat 250 "o"))})))))
 
 ;(defn test-ns-hook []
 ;  (test-table-with-top-level-map))
 
 (deftest test-table-inflation
   (is (=
-    (unindent
-      "
+       (unindent
+        "
       +---+---+---+---+---+---+---+---+---+
       | 0 |   |   |   |   |   |   |   |   |
       +---+---+---+---+---+---+---+---+---+
@@ -468,9 +465,7 @@
       | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
       +---+---+---+---+---+---+---+---+---+
       ")
-    (table-str
-      (for [n (range 1 10)]
-        (range n))))))
-
-
+       (table-str
+        (for [n (range 1 10)]
+          (range n))))))
 
