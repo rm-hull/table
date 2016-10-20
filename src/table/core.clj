@@ -1,8 +1,8 @@
 (ns table.core
   (:require
-    [clojure.string :as s]
-    [table.width :refer :all]
-    [table.ansi :refer :all]))
+   [clojure.string :as s]
+   [table.width :refer :all]
+   [table.ansi :refer :all]))
 
 (declare style-for format-cell render-rows-with-fields escape-newline render-rows table-str)
 
