@@ -1,4 +1,4 @@
-(defproject rm-hull/table "0.6.1"
+(defproject rm-hull/table "0.6.2"
   :description "Display ascii tables for almost any data structure with ease"
   :url "http://github.com/rm-hull/table"
   :license {
@@ -21,6 +21,6 @@
       :plugins [
         [lein-cljfmt "0.5.6"]
         [lein-codox "0.10.1"]
-        [lein-cloverage "1.0.7"]]
+        [lein-cloverage "1.0.8"]]
       :dependencies [
         [org.clojure/clojure "1.8.0"]]}})

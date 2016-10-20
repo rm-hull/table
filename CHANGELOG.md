@@ -1,3 +1,6 @@
+## 0.6.2
+* Reset ANSI codes if fields are truncated
+
 ## 0.6.1
 * Added :rst style (pulled from @schmir's branch)
 * Widths of strings with ANSI escape codes are calculated correctly
