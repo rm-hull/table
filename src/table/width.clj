@@ -30,11 +30,14 @@
          (- field-count 1)
          (- max-width (+ new-width inner-border-length)))))))
 
+(defn strip-ansi [text]
+  (s/replace (str text) #"\u001b\[\d+m" ""))
+
 (defn get-initial-widths [all-rows]
   (map
-    (fn [idx]
-      (apply max (map #(count (str (nth % idx))) all-rows)))
-    (range (count (first all-rows)))))
+   (fn [idx]
+     (apply max (map #(count (strip-ansi (nth % idx))) all-rows)))
+   (range (count (first all-rows)))))
 
 (defn- max-width-per-field [current-width field-count]
   (quot (actual-width current-width field-count) field-count))
