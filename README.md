@@ -14,7 +14,7 @@ All rights of the original author reserved.
 
 ### Pre-requisites
 
-You will need [Leiningen](https://github.com/technomancy/leiningen) 2.6.1 or above installed.
+You will need [Leiningen](https://github.com/technomancy/leiningen) 2.7.1 or above installed.
 
 ### Building
 
