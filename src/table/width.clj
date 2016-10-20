@@ -1,5 +1,8 @@
 (ns table.width
-  (:require clojure.java.shell clojure.java.io clojure.string))
+  (:require
+   [clojure.java.shell :refer [sh]]
+   [clojure.java.io :as io]
+   [clojure.string :as s]))
 
 (declare get-initial-widths max-width-per-field actual-width auto-resize-widths
          detect-terminal-width command-exists?)
@@ -47,7 +50,7 @@
     arg))
 
 (defn- stty-detect []
-  (->> (clojure.java.shell/sh "/bin/sh" "-c" "stty -a < /dev/tty")
+  (->> (sh "/bin/sh" "-c" "stty -a < /dev/tty")
        :out
        (re-find #" (\d+) columns")
        vec
@@ -59,12 +62,12 @@
 (defn- detect-terminal-width []
   (ensure-valid-width
    (cond
-    (System/getenv "COLUMNS") (Integer. (System/getenv "COLUMNS"))
-    (command-exists? "stty") (stty-detect))))
+     (System/getenv "COLUMNS") (Integer. (System/getenv "COLUMNS"))
+     (command-exists? "stty") (stty-detect))))
 
 (defn- command-exists?
   "Determines if command exists in $PATH"
   [cmd]
   (some
-    #(-> (str % "/" cmd) clojure.java.io/file .isFile)
-    (-> (System/getenv "PATH") (clojure.string/split #":"))))
+   #(-> (str % "/" cmd) io/file .isFile)
+   (-> (System/getenv "PATH") (s/split #":"))))
