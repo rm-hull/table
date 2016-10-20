@@ -1,5 +1,6 @@
 ## 0.6.1
 * Added :rst style (pulled from @schmir's branch)
+* Widths of strings with ANSI escape codes are calculated correctly
 
 ## 0.6.0
 * Divergent fork of https://github.com/cldwalker/table
