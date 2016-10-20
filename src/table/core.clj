@@ -1,6 +1,8 @@
 (ns table.core
-  (:require table.width)
-  (:use [clojure.string :only [join]]))
+  (:require
+    [clojure.string :as s]
+    [table.width :refer :all]
+    [table.ansi :refer :all]))
 
 (declare style-for format-cell render-rows-with-fields escape-newline render-rows table-str)
 
@@ -44,7 +46,7 @@
   "Same options as table but returns table as a string"
   [args & {:keys [style] :or {style :plain} :as options}]
   (binding [*style* (if (map? style) style (style styles))]
-    (apply str (join "\n" (render-rows args (if (map? options) options {}))))))
+    (apply str (s/join "\n" (render-rows args (if (map? options) options {}))))))
 
 (defn- inflate
   "Calculates the length of the longest row of columns, and returns the rows
@@ -88,16 +90,16 @@
 
 (defn- wrap-row
   [row [beg mid end]]
-  (str beg (join mid row) end))
+  (str beg (s/join mid row) end))
 
 (defn- render-rows-with-fields [rows fields options]
   (let [headers (map #(if (keyword? %) (name %) (str %)) fields)
-        widths (table.width/get-widths (cons headers rows))
+        widths (get-widths (cons headers rows))
         fmt-row (fn [row] (map format-cell row widths))
         headers (fmt-row headers)
         border-for (fn [section dash-key]
                      (let [dash (or (style-for dash-key) (style-for :dash))]
-                       (wrap-row (map #(join (repeat % dash))
+                       (wrap-row (map #(s/join (repeat % dash))
                                       widths)
                                  (style-for section))))
         header (wrap-row headers (style-for :header-walls))
@@ -114,11 +116,22 @@
 
 (defn- style-for [k] (k *style*))
 
+(def spaces (s/join (repeat 256 " ")))
+
+(defn- pad-right [string width]
+  (let [len (count (strip-ansi string))]
+    (str (subs spaces 0 (- width len)) string)))
+
+(defn- pad-left [string width]
+  (let [len (count (strip-ansi string))]
+    (str string (subs spaces 0 (- width len)))))
+
+(defn- truncate [string width pad-fn]
+  (if (> (count (strip-ansi string)) width)
+    (suffix-reset-ansi (str (subs string 0 (- width 3)) "..."))
+    (pad-fn string width)))
+
 (defn format-cell [string width]
   (if (zero? width)
     ""
-    (format
-     (str "%-" width "." width "s")
-     (if (> (count string) width)
-       (str (.substring string 0 (- width 3)) "...")
-       string))))
+    (truncate string width pad-left)))

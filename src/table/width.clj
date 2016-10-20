@@ -2,7 +2,8 @@
   (:require
    [clojure.java.shell :refer [sh]]
    [clojure.java.io :as io]
-   [clojure.string :as s]))
+   [clojure.string :as s]
+   [table.ansi :refer :all]))
 
 (declare get-initial-widths max-width-per-field actual-width auto-resize-widths
          detect-terminal-width command-exists?)
@@ -29,9 +30,6 @@
          (rest widths)
          (- field-count 1)
          (- max-width (+ new-width inner-border-length)))))))
-
-(defn strip-ansi [text]
-  (s/replace (str text) #"\u001b\[\d+m" ""))
 
 (defn get-initial-widths [all-rows]
   (map
