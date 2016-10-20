@@ -6,8 +6,7 @@
     :url "http://opensource.org/licenses/MIT"}
   :repl-options  {
     :init-ns table.core}
-  :dependencies [
-    [org.clojure/clojure "1.8.0"]]
+  :dependencies [ ]
   :scm {:url "git@github.com:rm-hull/table.git"}
   :source-paths ["src"]
   :jar-exclusions [#"(?:^|/).git"]
@@ -20,7 +19,7 @@
     :dev {
       :global-vars {*warn-on-reflection* true}
       :plugins [
-        [lein-codox "0.10.0"]
+        [lein-codox "0.10.1"]
         [lein-cloverage "1.0.7"]]
       :dependencies [
         [org.clojure/clojure "1.8.0"]]}})
