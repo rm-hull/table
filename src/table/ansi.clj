@@ -5,7 +5,8 @@
 (def ^:private pattern (re-pattern #"\u001b\[\d+m"))
 
 (defn strip-ansi [text]
-  (s/replace (str text) pattern ""))
+  (when text
+    (s/replace (str text) pattern "")))
 
 (def reset-ansi
   "\u001b[0m")
