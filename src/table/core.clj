@@ -60,10 +60,10 @@
   [table options]
   (let [top-level-vec (not (coll? (first table)))
         fields (vec (cond
-                 top-level-vec [:value]
-                 (map? (first table)) (or (:fields options) (distinct (vec (flatten (map keys table)))))
-                 (map? table) [:key :value]
-                 :else (first (inflate table))))
+                      top-level-vec [:value]
+                      (map? (first table)) (or (:fields options) (distinct (vec (flatten (map keys table)))))
+                      (map? table) [:key :value]
+                      :else (first (inflate table))))
         rows (cond
                top-level-vec (map #(vector %) table)
                (map? (first table)) (map #(map (fn [k] (get % k)) fields) table)
