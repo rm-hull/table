@@ -50,20 +50,23 @@
     (if (> arg 0) arg 100)
     arg))
 
+(defn parse-int [s]
+  (when s
+    (Integer/parseInt s)))
+
 (defn- stty-detect []
   (->> (sh "/bin/sh" "-c" "stty -a < /dev/tty")
        :out
        (re-find #" (\d+) columns")
-       vec
        second
-       ((fn  [_ two] (if two (Integer. two))) :not-used)))
+       parse-int))
 
 ; since Java doesn't recognize COLUMNS by default you need to `export COLUMNS` for it
 ; be recognized
 (defn- detect-terminal-width []
   (ensure-valid-width
    (cond
-     (System/getenv "COLUMNS") (Integer. (System/getenv "COLUMNS"))
+     (System/getenv "COLUMNS") (Integer/parseInt (System/getenv "COLUMNS"))
      (command-exists? "stty") (stty-detect))))
 
 (defn- command-exists?
