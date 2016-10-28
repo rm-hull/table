@@ -69,7 +69,7 @@
                (map? (first table)) (map #(map (fn [k] (get % k)) fields) table)
                (map? table) table
                :else (rest (inflate table)))
-        rows (map (fn [row] (map #(if (nil? %) "" (str %)) row)) rows)
+        rows (map (fn [row] (map str row)) rows)
         sort-opt (options :sort)
         rows (if (and sort-opt (some #{sort-opt} (conj fields true)))
                (sort-by #(nth % (if (true? sort-opt) 0 (.indexOf #^java.util.List fields sort-opt))) rows)
@@ -110,7 +110,7 @@
             body [(border-for :bottom :bottom-dash)])))
 
 (defn- escape-newline [string]
-  (clojure.string/replace string (str \newline) (char-escape-string \newline)))
+  (s/replace string "\n" (char-escape-string \newline)))
 
 (defn- style-for [k] (k *style*))
 
