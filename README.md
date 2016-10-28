@@ -30,7 +30,7 @@ There is a version hosted at [Clojars](https://clojars.org/rm-hull/table).
 For leiningen include a dependency:
 
 ```clojure
-[rm-hull/table "0.6.3"]
+[rm-hull/table "0.6.4"]
 ```
 
 For maven-based projects, add the following to your `pom.xml`:
