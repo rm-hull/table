@@ -4,7 +4,7 @@
 [![Dependencies Status](https://jarkeeper.com/rm-hull/table/status.svg)](https://jarkeeper.com/rm-hull/table)
 [![Downloads](https://jarkeeper.com/rm-hull/table/downloads.svg)](https://jarkeeper.com/rm-hull/table)
 [![Clojars Project](https://img.shields.io/clojars/v/rm-hull/table.svg)](https://clojars.org/rm-hull/table)
-[![Maintenance](https://img.shields.io/maintenance/yes/2016.svg?maxAge=2592000)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2017.svg?maxAge=2592000)]()
 
 Display ascii tables that fit in your terminal for almost any data
 structure.
