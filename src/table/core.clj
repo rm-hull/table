@@ -69,7 +69,7 @@
                (map? (first table)) (map #(map (fn [k] (get % k)) fields) table)
                (map? table) table
                :else (rest (inflate table)))
-        rows (map (fn [row] (map str row)) rows)
+        rows (map (fn [row] (map #(if-not (nil? %) (print-str %) (str %)) row)) rows)
         sort-opt (options :sort)
         rows (if (and sort-opt (some #{sort-opt} (conj fields true)))
                (sort-by #(nth % (if (true? sort-opt) 0 (.indexOf #^java.util.List fields sort-opt))) rows)
