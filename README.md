@@ -154,7 +154,7 @@ table can handle plain maps and vectors of course:
 
 If your terminal width isn't being auto-detected, you can execute this in
 your shell before using the repl: `export COLUMNS`. Alternatively you can
-bind/alter table.width/\*width\* to your desired width.
+bind/alter `table.width/\*width\*` to your desired width.
 
 ## License
 
