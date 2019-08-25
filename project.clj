@@ -23,4 +23,4 @@
         [lein-codox "0.10.3"]
         [lein-cloverage "1.0.10"]]
       :dependencies [
-        [org.clojure/clojure "1.9.0"]]}})
+        [org.clojure/clojure "1.10.0"]]}})
