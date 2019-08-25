@@ -114,15 +114,19 @@
 
 (defn- style-for [k] (k *style*))
 
-(def spaces (s/join (repeat 256 " ")))
+(defn- spaces [n]
+  (->> " "
+       repeat
+       (take n)
+       s/join))
 
 (defn- pad-right [string width]
   (let [len (count (strip-ansi string))]
-    (str (subs spaces 0 (- width len)) string)))
+    (str (spaces (- width len)) string)))
 
 (defn- pad-left [string width]
   (let [len (count (strip-ansi string))]
-    (str string (subs spaces 0 (- width len)))))
+    (str string (spaces (- width len)))))
 
 (defn- truncate [string width pad-fn]
   (if (> (count (strip-ansi string)) width)
