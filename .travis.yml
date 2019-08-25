@@ -1,5 +1,5 @@
 language: clojure
-lein: 2.7.1
+lein: 2.8.1
 install:
   # Get recent node:
   - . $HOME/.nvm/nvm.sh
@@ -13,6 +13,7 @@ before_script:
   - lein cljfmt check
 script:
   - lein with-profile +dev cloverage --coveralls
+after_success:
   - curl -F 'json_file=@target/coverage/coveralls.json' 'https://coveralls.io/api/v1/jobs'
 jdk:
-  - oraclejdk8
+  - oraclejdk11
